@@ -17,7 +17,7 @@ class Card(val cardsuit:Suit,val cardvalue:Value) {
             "Q"->10
             "K"->10
             "A"->11
-        //dasdas
+        //dasdasfgfgf
         }
     }
 }
