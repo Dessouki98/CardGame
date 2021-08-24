@@ -4,10 +4,8 @@ package entity;
 /**
  * Enum to distinguish between the 8 possible values in a french-suited card game:
  * 7-10, Jack, Queen, King, and Ace.
- *
  * The values are ordered according to their most common ordering:
- * 7< ... < 10 < Jack < Queen < King < Ace
- *
+ * 7<... < 10 < Jack < Queen < King < Ace
  */
 enum class Value {
     SEVEN,

@@ -1,9 +1,13 @@
 package entity
-
+/**
+ * Data class for the single typ of game elements that the game "Schwimmen" knows: cards.
+ *
+ * It is characterized by a [cardSuit] and a [cardValue]
+ */
 class Card(val cardsuit:Suit,val cardvalue:Value) {
     //Suit( CLUBS(Kreuz) -> "♣" ,SPADES(Pik) -> "♠", HEARTS(Herz) -> "♥" ,DIAMONDS(Karo) -> "♦")
     //Value(7,8,9,10,JACK(bube),QUEEN(Dame),KING(könig),ACE(Ass))...Jack,Queen,King=10Pnkt,ACE=11Pnkt
-    //Suit needs to be the same to add the Values of cards together
+    //Suit needs to be the same to add the Values of cards together.
     override fun toString()="$cardsuit$cardvalue"
     fun getPoints()
     {
@@ -17,7 +21,7 @@ class Card(val cardsuit:Suit,val cardvalue:Value) {
             "Q"->10
             "K"->10
             "A"->11
-        //newmain
+
         }
     }
 }
