@@ -3,7 +3,7 @@ package entity
 import kotlin.test.*
 
 /**
- * Test cases for [WarCard]
+ * Test cases for [Card]
  */
 class CardTest {
 
@@ -24,7 +24,7 @@ class CardTest {
      * Check if to String produces the correct strings for some test cards
      * of all four suits.
      */
-    @Test
+
     fun testToString() {
         assertEquals(spadesChar + "A", aceOfSpades.toString())
         assertEquals(clubsChar + "J", jackOfClubs.toString())
@@ -36,26 +36,47 @@ class CardTest {
      * Check if toString produces a 2 character string for every possible card
      * except the 10,11 (for which length=3 is ensured)
      */
-    @Test
+
     fun testToStringLength() {
         Suit.values().forEach {suit ->
             Value.values().forEach {value ->
                 if (value == Value.TEN)
-                    assertEquals(3, WarCard(suit, value).toString().length)
+                    assertEquals(3, Card(suit, value).toString().length)
                 else
-                    assertEquals(2, WarCard(suit, value).toString().length)
+                    assertEquals(2, Card(suit, value).toString().length)
+            }
+        }
+    }
+    /**
+     * Check if getPoints the right value of the Card
+     */
+    fun testgetpoints() {
+        Suit.values().forEach {suit ->
+            Value.values().forEach {value ->
+                if (value == Value.SEVEN)
+                    assertEquals(7, Card(suit, value).getPoints())
+                if (value == Value.EIGHT)
+                    assertEquals(8, Card(suit, value).getPoints())
+                if (value == Value.NINE)
+                    assertEquals(9, Card(suit, value).getPoints())
+                if (value == Value.TEN||value == Value.JACK||value == Value.QUEEN||value == Value.KING)
+                    assertEquals(10, Card(suit, value).getPoints())
+                if (value == Value.ACE)
+                    assertEquals(11, Card(suit, value).getPoints())
+                else
+                    assertEquals(0, Card(suit, value).getPoints())
             }
         }
     }
 
-    @Test
+
     fun testCompareTo() {
         assertTrue(jackOfDiamonds < queenOfHearts)
         assertFalse(jackOfClubs < jackOfDiamonds)
         assertTrue(jackOfClubs <= jackOfDiamonds)
     }
 
-    @Test
+
     fun testEquals() {
         assertEquals(queenOfHearts, otherQueenOfHearts)
         assertNotSame(queenOfHearts, otherQueenOfHearts)
