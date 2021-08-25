@@ -9,7 +9,7 @@ class PlayerService(private val root:SchwimmenService) {
         checkNotNull(game)
         val active=game.activePlayer
         game.players[active].knocked= true
-        GameService.nextTurn()
+        //GameService.nextTurn()
     }
     fun pass()
     {
@@ -17,7 +17,7 @@ class PlayerService(private val root:SchwimmenService) {
         checkNotNull(game)
         val active=game.activePlayer
         game.players[active].passed= true
-        GameService.nextTurn()
+        //GameService.nextTurn()
     }
     fun swapOneCard(handCard:Card,tableCard: Card)
     {
@@ -36,7 +36,7 @@ class PlayerService(private val root:SchwimmenService) {
         table.remove(tableCard)
         table.add(CardHolder)
         //Gebe an den nächsten Spieler weiter
-        GameService.nextTurn()
+        //GameService.nextTurn()
     }
     fun swapThreeCards()
     {
@@ -67,7 +67,7 @@ class PlayerService(private val root:SchwimmenService) {
         }
 
         //Gebe an den nächsten Spieler weiter
-        GameService.nextTurn()
+        //GameService.nextTurn()
     }
 
 }

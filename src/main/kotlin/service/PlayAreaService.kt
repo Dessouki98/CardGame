@@ -32,7 +32,7 @@ class PlayAreaService (private val root:SchwimmenService){
         val CardOnTable2 = myDeck.draw(1).get(0)
         val CardOnTable3 = myDeck.draw(1).get(0)
         val CardsOnTable= mutableListOf<Card>(CardOnTable1,CardOnTable2,CardOnTable3)
-        refresh
+        //refresh
     }
     fun hasDeckEnoughCards():Boolean{
         val game=root.currentGame
