@@ -25,7 +25,7 @@ class CardTest {
      * Check if to String produces the correct strings for some test cards
      * of all four suits.
      */
-
+    @Test
     fun testToString() {
         assertEquals(spadesChar + "A", aceOfSpades.toString())
         assertEquals(clubsChar + "J", jackOfClubs.toString())
@@ -51,6 +51,7 @@ class CardTest {
     /**
      * Check if getPoints the right value of the Card
      */
+    @Test
     fun testgetpoints() {
         Suit.values().forEach {suit ->
             Value.values().forEach {value ->
@@ -70,14 +71,14 @@ class CardTest {
         }
     }
 
-
+    @Test
     fun testCompareTo() {
         assertTrue(jackOfDiamonds < queenOfHearts)
         assertFalse(jackOfClubs < jackOfDiamonds)
         assertTrue(jackOfClubs <= jackOfDiamonds)
     }
 
-
+    @Test
     fun testEquals() {
         assertEquals(queenOfHearts, otherQueenOfHearts)
         assertNotSame(queenOfHearts, otherQueenOfHearts)

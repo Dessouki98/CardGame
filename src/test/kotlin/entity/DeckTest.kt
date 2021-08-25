@@ -17,7 +17,7 @@ class DeckTest {
      * Check if draw cards works as we draw the three cards given above we should get them back in form of list
      */
  @Test
-    fun drawThreeTest(){
+    fun drawTest(){
         val deckThreeCards = Deck(mutableListOf(aceOfSpades,kingOfHearts,queenOfClubs))
         val drawnCards = deckThreeCards.draw(3)
         assertEquals(mutableListOf(aceOfSpades, kingOfHearts, queenOfClubs), drawnCards)
