@@ -4,7 +4,7 @@ package entity
  * in the [playArea] entity, All player Information is stored in ([Player]),and the Gamestate is stored in ([GameState])
  * this class is just a wrapper for two player- four Player objects,the Gamestatus,and the Cards Information.
  */
-class Schwimmen (var players: MutableList<Player>, var playArea: PlayArea){
-    var activePlayer = 0
-    var gameState = GameState.GAME_RUNNING
+class Schwimmen (val players: MutableList<Player>, val playArea: PlayArea){
+    public var activePlayer = 0
+    public var gameState:GameState=GameState.GAME_RUNNING
 }

@@ -16,8 +16,8 @@ class Deck(val listOfCards: MutableList<Card>){
      *
      * @throws IllegalArgumentException if not enough cards on stack to draw the desired amount.
      */
-    fun draw(amount: Int = 3): List<Card> {
-        require(amount in 3..listOfCards.size) { "can't draw $amount cards from $listOfCards" }
+    fun draw(amount: Int = 1): List<Card> {
+        require(amount in 1..listOfCards.size) { "can't draw $amount cards from $listOfCards" }
         return List(amount) { listOfCards.removeFirst() }
     }
 }
