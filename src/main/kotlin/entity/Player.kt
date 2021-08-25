@@ -4,11 +4,7 @@ package entity
  * whether a the player has ([knocked]), or if has ([passed]),there is also a ([place]) which is an integer showing the plyer Seat.
  * @param hand shows which Cards has the player in hand.
  */
-class Player(
-    val name:String?=null,
-    val place:Int=0,
-    var knocked:Boolean=false,
-    var passed:Boolean=false,
-    var hand: MutableList<Card>
-
-)
+class Player (val name: String, val place: Int, var hand: MutableList<Card>){
+    var knocked = false
+    var passed = false
+}

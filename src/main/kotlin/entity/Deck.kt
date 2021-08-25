@@ -8,16 +8,7 @@ import kotlin.random.Random
  *
  * @param [random] can be provided to ensure deterministic behavior of [shuffle]
  */
-class Deck(private val random: Random = Random) {
-    public val cards: ArrayDeque<Card> = ArrayDeque(32)
-
-    /**
-     * Shuffles the cards in this stack
-     */
-    fun shuffle() {
-        cards.shuffle(random)
-    }
-
+class Deck(val listOfCards: MutableList<Card>){
     /**
      * Draws [amount] cards from this stack.
      *
@@ -25,8 +16,8 @@ class Deck(private val random: Random = Random) {
      *
      * @throws IllegalArgumentException if not enough cards on stack to draw the desired amount.
      */
-    fun draw(amount: Int = 1): List<Card> {
-        require(amount in 1..cards.size) { "can't draw $amount cards from $cards" }
-        return List(amount) { cards.removeFirst() }
+    fun draw(amount: Int = 3): List<Card> {
+        require(amount in 3..listOfCards.size) { "can't draw $amount cards from $listOfCards" }
+        return List(amount) { listOfCards.removeFirst() }
     }
 }

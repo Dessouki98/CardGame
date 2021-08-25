@@ -5,6 +5,7 @@ import kotlin.test.*
 /**
  * Test cases for [Card]
  */
+
 class CardTest {
 
     // Some cards to perform the tests with
@@ -36,7 +37,7 @@ class CardTest {
      * Check if toString produces a 2 character string for every possible card
      * except the 10,11 (for which length=3 is ensured)
      */
-
+    @Test
     fun testToStringLength() {
         Suit.values().forEach {suit ->
             Value.values().forEach {value ->

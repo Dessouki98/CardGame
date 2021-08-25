@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.*
+
 
 /**
  * Enum to distinguish between the 8 possible values in a french-suited card game:
@@ -33,5 +35,15 @@ enum class Value {
             KING -> "K"
             ACE -> "A"
         }
+    companion object {
+
+        /**
+         * A set of values for a reduced set of 4x8=32 cards (starting with the 7)
+         */
+        fun shortDeck(): Set<Value> {
+            return EnumSet.of(ACE, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING)
+        }
+
+    }
 }
 
