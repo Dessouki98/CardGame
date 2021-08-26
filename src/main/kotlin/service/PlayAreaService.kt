@@ -1,43 +1,63 @@
 package service
-
 import entity.Card
 import entity.Deck
 import entity.Suit
 import entity.Value
-
-class PlayAreaService (private val root:SchwimmenService){
-    fun createDeck():Deck
-    {
+/**
+ * the PlayAreaService is the one Responsible for all actions belonging to the playArea Field
+ */
+class PlayAreaService(private val root: SchwimmenService) : AbstractRefreshingService() {
+    /**
+     *Creates a Deck with 32 Cards and is then used throw the game.
+     */
+    fun createDeck(): Deck {
         val allCards: MutableList<Card> = defaultRandomCardList()
-        val myDeck=Deck(allCards)
-        return myDeck
+        return Deck(allCards)
     }
+
     /**
      * Creates a shuffled 32 cards list of all four suits and cards
      * from 7 to Ace
      */
-    private fun defaultRandomCardList() = MutableList(32){ index ->
+    private fun defaultRandomCardList() = MutableList(32) { index ->
         Card(
             Suit.values()[index / 8],
             Value.values()[(index % 8) + 5]
         )
-    }.shuffled().toMutableList()
+    }.shuffled().toMutableList()//Changes from list to mutable list
 
-    fun renewMiddleCards()
-    {
-        val game=root.currentGame
+    /**
+     * changes the middle Cards with 3 new from the Deck.
+     *
+     * @throws IllegalStateException if no game has started yet.
+     *
+     * @throws IllegalStateException if no Deck available.
+     */
+    fun renewMiddleCards() {
+        if(!hasDeckEnoughCards())
+        {
+            root.gameService.exitGame()
+        }
+        val game = root.currentGame
         checkNotNull(game)
-        val myDeck=game.playArea.deck
-        val CardOnTable1 = myDeck.draw(1).get(0)
-        val CardOnTable2 = myDeck.draw(1).get(0)
-        val CardOnTable3 = myDeck.draw(1).get(0)
-        val CardsOnTable= mutableListOf<Card>(CardOnTable1,CardOnTable2,CardOnTable3)
-        //refresh
+        game.playArea.cards.clear()
+        val myDeck = game.playArea.deck
+        val cardOnTable1 = myDeck.draw(1)[0]
+        val cardOnTable2 = myDeck.draw(1)[0]
+        val cardOnTable3 = myDeck.draw(1)[0]
+        game.playArea.cards.add(cardOnTable1)
+        game.playArea.cards.add(cardOnTable2)
+        game.playArea.cards.add(cardOnTable3)
     }
-    fun hasDeckEnoughCards():Boolean{
-        val game=root.currentGame
+
+    /**
+     * checks if the Deck has more than three cards.
+     * @throws IllegalStateException if no game has started yet
+     */
+    private fun hasDeckEnoughCards(): Boolean {
+        val game = root.currentGame
         checkNotNull(game)
-        val myDeck=game.playArea.deck
-        return myDeck.listOfCards.size>3
+        val myDeck = game.playArea.deck
+        return myDeck.listOfCards.size > 3
     }
 }

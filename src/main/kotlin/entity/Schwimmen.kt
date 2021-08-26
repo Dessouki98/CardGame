@@ -5,6 +5,6 @@ package entity
  * this class is just a wrapper for two player- four Player objects,the Gamestatus,and the Cards Information.
  */
 class Schwimmen (val players: MutableList<Player>, val playArea: PlayArea){
-    public var activePlayer = 0
-    public var gameState:GameState=GameState.GAME_RUNNING
+    var activePlayer = 0
+    var gameState:GameState=GameState.GAME_RUNNING
 }
