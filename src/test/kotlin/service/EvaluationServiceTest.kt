@@ -10,6 +10,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
+/**
+ * test Evaluation Service which its main request to perform calculating of points and shows how won.
+ */
 class EvaluationServiceTest
 {
     /**

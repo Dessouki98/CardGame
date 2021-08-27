@@ -1,9 +1,11 @@
 package service
-
-
 import entity.Player
 import view.Refreshable
 import kotlin.test.*
+
+/**
+ * this class test the PlayerService Class which consists of the actions that a player can perform during the game
+ */
 class PlayerServiceTest {
     /**
      * a private Function that only Creates a new Game with 2 players and return it back.

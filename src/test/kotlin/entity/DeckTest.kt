@@ -5,6 +5,9 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFails
 import kotlin.test.assertSame
 
+/**
+ * the Class provides test for the Deck entity and shows that they Work.
+ */
 
 class DeckTest {
 
