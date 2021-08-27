@@ -16,6 +16,9 @@ class TestRefreshable: Refreshable {
     var refreshAfterGameFinishedCalled: Boolean = false
         private set
 
+    var refreshAfterCardDrawnCalled: Boolean = false
+        private set
+
     var refreshAfterCardSwapCalled: Boolean = false
         private set
 
@@ -35,6 +38,7 @@ class TestRefreshable: Refreshable {
     fun reset() {
         refreshAfterGameStartCalled = false
         refreshAfterGameFinishedCalled = false
+        refreshAfterCardDrawnCalled=false
         refreshAfterCardSwapCalled = false
         refreshAfterKnockedCalled = false
         refreshAfterPassedCalled = false
@@ -50,15 +54,15 @@ class TestRefreshable: Refreshable {
     }
 
     override fun refreshAfterCardDrawn() {
-        refreshAfterCardSwapCalled = true
+        refreshAfterCardDrawnCalled = true
     }
 
     override fun refreshAfterCardSwap() {
-        refreshAfterKnockedCalled = true
+        refreshAfterCardSwapCalled = true
     }
 
     override fun refreshAfterKncoked() {
-        refreshAfterPassedCalled = true
+        refreshAfterKnockedCalled = true
     }
 
     override fun refreshAfterPassed() {
