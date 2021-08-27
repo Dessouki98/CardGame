@@ -2,10 +2,7 @@ package service
 
 import entity.Player
 import view.Refreshable
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
+import kotlin.test.*
 
 class PlayAreaServiceTest {
     /**
@@ -36,7 +33,7 @@ class PlayAreaServiceTest {
     {
         val testRefreshable = TestRefreshable()
         val mc = setUpGame(testRefreshable)
-
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
         //Deck contains One Card of each Suit*Value
@@ -66,6 +63,7 @@ class PlayAreaServiceTest {
         val mc = setUpGame(testRefreshable)
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         //test that when called all Cards on Table will be replaced
         val cards=mc.currentGame!!.playArea.cards
         val oldCards= mutableListOf(cards[0],cards[1],cards[2])

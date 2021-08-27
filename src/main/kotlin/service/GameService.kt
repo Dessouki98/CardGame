@@ -62,10 +62,12 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
                 if (game.playArea.deck.listOfCards.size < 3) {
                     exitGame()
                 } else {
+                    onAllRefreshables { refreshAfterCardDrawn() }
                     root.playAreaService.renewMiddleCards()
                 }
             }
         }
+        onAllRefreshables { refreshAfterTurnChanged() }
         game.activePlayer++
     }
 

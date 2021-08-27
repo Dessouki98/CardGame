@@ -72,6 +72,10 @@ class CardTest {
         }
     }
 
+    /**
+     * Test the Fact that cards can have more points than other and
+     * the card with more Point is always "bigger"
+     */
     @Test
     fun testCompareTo() {
         assertTrue(jackOfDiamonds < queenOfHearts)
@@ -79,6 +83,9 @@ class CardTest {
         assertTrue(jackOfClubs <= jackOfDiamonds)
     }
 
+    /**
+     * test if the cards are equal
+     */
     @Test
     fun testEquals() {
         assertEquals(queenOfHearts, otherQueenOfHearts)

@@ -41,7 +41,7 @@ class EvaluationServiceTest
         val mc = setUpGame(testRefreshable)
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
-
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         val p1 = mc.currentGame!!.players[0]
         val p2 = mc.currentGame!!.players[1]
         val p3 = mc.currentGame!!.players[2]
@@ -88,6 +88,7 @@ class EvaluationServiceTest
         val testRefreshable = TestRefreshable()
         val mc = setUpGame(testRefreshable)
         assertNotNull(mc.currentGame)
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         val p1 = mc.currentGame!!.players[0]
         val p2 = mc.currentGame!!.players[1]
         val p3 = mc.currentGame!!.players[2]

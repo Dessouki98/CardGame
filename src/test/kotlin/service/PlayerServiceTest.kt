@@ -34,6 +34,7 @@ class PlayerServiceTest {
         val mc = setUpGame(testRefreshable)
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         val p1 = mc.currentGame!!.players[0]
         val cartonHand=mc.currentGame!!.players[0].hand[0]
         val cardOnTable=mc.currentGame!!.playArea.cards[0]
@@ -48,8 +49,9 @@ class PlayerServiceTest {
         assertFalse{mc.currentGame!!.playArea.cards.contains(cardOnTable) }
         //player2 turn
         assertEquals(1, mc.currentGame!!.activePlayer)
+        assertTrue { testRefreshable.refreshAfterTurnChangedCalled }
         //Check if refreshed correctly
-        //assertTrue(testRefreshable.refreshAfterCardSwapCalled)
+        assertTrue(testRefreshable.refreshAfterCardSwapCalled)
     }
     /**
      * Test the case that the Game just started and p1 has now decided to switch all cards
@@ -60,6 +62,7 @@ class PlayerServiceTest {
         val mc = setUpGame(testRefreshable)
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         val p1 = mc.currentGame!!.players[0]
         val hand=p1.hand
         val table=mc.currentGame!!.playArea.cards
@@ -72,6 +75,7 @@ class PlayerServiceTest {
         assertEquals( hand, cardsOnTable)
         //player2 turn
         assertEquals(1, mc.currentGame!!.activePlayer)
+        assertTrue { testRefreshable.refreshAfterTurnChangedCalled }
         //Check if refreshed correctly
         assertTrue(testRefreshable.refreshAfterCardSwapCalled)
         //reset the parameters
@@ -84,7 +88,8 @@ class PlayerServiceTest {
     fun testPass()
     {
         val testRefreshable = TestRefreshable()
-        val mc = setUpGame(testRefreshable)
+        var mc = setUpGame(testRefreshable)
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
         val p1 = mc.currentGame!!.players[0]
@@ -94,6 +99,7 @@ class PlayerServiceTest {
         assertTrue { p1.passed }
         //checks if player2 get his turn
         assertEquals(1, mc.currentGame!!.activePlayer)
+        assertTrue { testRefreshable.refreshAfterTurnChangedCalled }
         //num of cards in deck >3...Game continues...17 Cards still
         assertEquals(17,mc.currentGame!!.playArea.deck.listOfCards.size)
         //now all pass too
@@ -102,11 +108,28 @@ class PlayerServiceTest {
         assertEquals(14,mc.currentGame!!.playArea.deck.listOfCards.size)
         //refresh after passed correctly
         assertTrue { testRefreshable.refreshAfterPassedCalled }
+        //Cards have been drawn from Deck
+        assertTrue { testRefreshable.refreshAfterCardDrawnCalled}
         //Game doesn't End yet
         assertFalse { testRefreshable.refreshAfterGameFinishedCalled }
         //reset the parameters
         testRefreshable.reset()
+        //restart the game now to show when not enough card the game ends
+        mc = setUpGame(testRefreshable)
+        //after this we got only 2 Cards
+        repeat(5)
+        {
+            mc.playAreaService.renewMiddleCards()
         }
+        //all players pass
+        repeat(4)
+        {
+            mc.playerService.pass()
+        }
+        //the game ends no enough cards
+        assertTrue { testRefreshable.refreshAfterGameFinishedCalled }
+
+    }
     /**
      * Test the case that the Game just started and p1 has now decided to knock
      */
@@ -115,6 +138,8 @@ class PlayerServiceTest {
     {
         val testRefreshable = TestRefreshable()
         val mc = setUpGame(testRefreshable)
+        //the game started
+        assertTrue { testRefreshable.refreshAfterGameStartCalled}
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
         val p1 = mc.currentGame!!.players[0]
@@ -124,6 +149,7 @@ class PlayerServiceTest {
         assertTrue { p1.knocked }
         //checks if player2 get his turn
         assertEquals(1, mc.currentGame!!.activePlayer)
+        assertTrue { testRefreshable.refreshAfterTurnChangedCalled }
         //refresh after knocked correctly
         //assertTrue { testRefreshable.refreshAfterKnockedCalled }
         //now player get to play one more time
