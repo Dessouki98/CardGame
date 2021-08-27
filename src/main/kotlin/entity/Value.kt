@@ -24,17 +24,18 @@ enum class Value {
      * provide a single character to represent this value.
      * Returns one of: 7/8/9/10/J/Q/K/A
      */
-    override fun toString() =
-        when (this) {
-            SEVEN -> "7"
-            EIGHT -> "8"
-            NINE -> "9"
-            TEN -> "10"
-            JACK -> "J"
-            QUEEN -> "Q"
-            KING -> "K"
-            ACE -> "A"
+    override fun toString():String {
+        return when (this) {
+            SEVEN -> return "7"
+            EIGHT -> return "8"
+            NINE -> return "9"
+            TEN -> return "10"
+            JACK -> return "J"
+            QUEEN -> return "Q"
+            KING -> return "K"
+            ACE -> return "A"
         }
+    }
     companion object {
 
         /**

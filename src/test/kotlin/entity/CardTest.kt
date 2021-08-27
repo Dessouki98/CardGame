@@ -55,18 +55,19 @@ class CardTest {
     fun testgetpoints() {
         Suit.values().forEach {suit ->
             Value.values().forEach {value ->
-                if (value == Value.SEVEN)
+                if (value.toString()=="7")
                     assertEquals(7, Card(suit, value).getPoints())
-                if (value == Value.EIGHT)
+                else if (value.toString() == "8")
                     assertEquals(8, Card(suit, value).getPoints())
-                if (value == Value.NINE)
+                else if (value.toString() == "9")
                     assertEquals(9, Card(suit, value).getPoints())
-                if (value == Value.TEN||value == Value.JACK||value == Value.QUEEN||value == Value.KING)
+                else if (value.toString() == "10"||
+                    value.toString() == "J" ||
+                    value.toString() == "Q" ||
+                    value.toString() == "K")
                     assertEquals(10, Card(suit, value).getPoints())
-                if (value == Value.ACE)
+                else if(value.toString() == "A")
                     assertEquals(11, Card(suit, value).getPoints())
-                else
-                    assertEquals(0, Card(suit, value).getPoints())
             }
         }
     }

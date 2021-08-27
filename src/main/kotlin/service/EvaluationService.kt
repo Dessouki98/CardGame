@@ -15,7 +15,7 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
      *
      * @throws IllegalStateException if no game has started yet
      */
-    private fun calculateScore(player: Player): Double? {
+     fun calculateScore(player: Player): Double {
         val myCard: MutableList<Double> = mutableListOf(0.0, 0.0, 0.0, 0.0, 0.0)
         for (card: Card in player.hand) {
             when (card.cardsuit.toString()) {
@@ -26,17 +26,14 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
             }
         }
         //Checks if the special condition is available
-        val card1Su = player.hand[0].cardsuit.toString()
         val card1Va = player.hand[0].cardvalue.toString()
-        val card2Su = player.hand[1].cardsuit.toString()
         val card2Va = player.hand[1].cardvalue.toString()
-        val card3Su = player.hand[2].cardsuit.toString()
         val card3Va = player.hand[2].cardvalue.toString()
-        if ((card1Su == card2Su && card2Su == card3Su) || (card1Va == card2Va && card2Va == card3Va)) {
+        if ((card1Va == card2Va && card2Va == card3Va)) {
             myCard[4] = 30.5
         }
         //returns max points for the given player
-        return myCard.maxOrNull()
+        return myCard.maxOrNull() as Double
     }
 
     /**

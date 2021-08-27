@@ -53,7 +53,7 @@ class TestRefreshable: Refreshable {
         refreshAfterCardSwapCalled = true
     }
 
-    override fun refreshAfterCardSwap(player: Player) {
+    override fun refreshAfterCardSwap() {
         refreshAfterKnockedCalled = true
     }
 

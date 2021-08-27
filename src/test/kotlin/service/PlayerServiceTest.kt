@@ -4,8 +4,10 @@ package service
 import entity.Player
 import view.Refreshable
 import kotlin.test.*
-
 class PlayerServiceTest {
+    /**
+     * a private Function that only Creates a new Game with 2 players and return it back.
+     */
     private fun setUpGame(vararg refreshables: Refreshable): SchwimmenService {
         val mc = SchwimmenService()
         refreshables.forEach { mc.addRefreshable(it) }
@@ -71,8 +73,9 @@ class PlayerServiceTest {
         //player2 turn
         assertEquals(1, mc.currentGame!!.activePlayer)
         //Check if refreshed correctly
-        //assertTrue(testRefreshable.refreshAfterCardSwapCalled)
-        //reset
+        assertTrue(testRefreshable.refreshAfterCardSwapCalled)
+        //reset the parameters
+        testRefreshable.reset()
     }
     /**
      * Test the case that the Game just started and p1 has now decided to pass
@@ -101,6 +104,7 @@ class PlayerServiceTest {
         assertTrue { testRefreshable.refreshAfterPassedCalled }
         //Game doesn't End yet
         assertFalse { testRefreshable.refreshAfterGameFinishedCalled }
+        //reset the parameters
         testRefreshable.reset()
         }
     /**

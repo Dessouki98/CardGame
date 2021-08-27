@@ -36,7 +36,7 @@ interface Refreshable {
      /**
       * perform refreshes that are necessary after a Care has been swapped.
       */
-     fun refreshAfterCardSwap(player: Player) {}
+     fun refreshAfterCardSwap() {}
 
      /**
       * perform refreshes that are necessary after player has knocked.
