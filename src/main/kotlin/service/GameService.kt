@@ -97,6 +97,9 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
         return true
     }
 
+    /**
+     * exit game is resposinble for ending the game and giving wining player back.
+     */
     fun exitGame() {
         root.evaluationService.calculateWinner()
         onAllRefreshables { refreshAfterGameFinished() }

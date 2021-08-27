@@ -12,6 +12,10 @@ class Card(val cardsuit:Suit,val cardvalue:Value) {
      * to String method ives the String value in an int value.
      * */
     override fun toString()="$cardsuit$cardvalue"
+
+    /**
+     * getPoints gives the Points to the given Card
+     */
     fun getPoints():Int
     {
         when(cardvalue.toString())

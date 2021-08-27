@@ -3,6 +3,10 @@ import entity.PlayArea
 import entity.Player
 import entity.Schwimmen
 import view.Refreshable
+
+/**
+ * Class Schwimmen Serviec works as wraper for all the Entities and connects them to Services
+ */
 class SchwimmenService {
     /**
      * The currently active game. Can be `null`, if no game has started yet.
