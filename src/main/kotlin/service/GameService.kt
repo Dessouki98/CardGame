@@ -17,6 +17,7 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
      */
     fun startGame(players: MutableList<Player>) {
         val myDeck = root.playAreaService.createDeck()
+        root.currentGame!!.gameState=GameState.GAME_RUNNING
         val cardOnTable1 = myDeck.draw(1)[0]
         val cardOnTable2 = myDeck.draw(1)[0]
         val cardOnTable3 = myDeck.draw(1)[0]
@@ -103,6 +104,7 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
      * exit game is resposinble for ending the game and giving wining player back.
      */
     fun exitGame() {
+        root.currentGame!!.gameState=GameState.GAME_ENDED
         root.evaluationService.calculateWinner()
         onAllRefreshables { refreshAfterGameFinished() }
     }

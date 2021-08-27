@@ -1,5 +1,6 @@
 package service
 import entity.Card
+import entity.GameState
 import entity.Player
 /**
  * Service layer Evaluation that provides the number of points each player has, and it also
@@ -16,6 +17,7 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
      * @throws IllegalStateException if no game has started yet
      */
      fun calculateScore(player: Player): Double {
+        root.currentGame!!.gameState=GameState.GAME_EVALUATION
         val myCard: MutableList<Double> = mutableListOf(0.0, 0.0, 0.0, 0.0, 0.0)
         for (card: Card in player.hand) {
             when (card.cardsuit.toString()) {
@@ -33,6 +35,7 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
             myCard[4] = 30.5
         }
         //returns max points for the given player
+
         return myCard.maxOrNull() as Double
     }
 
@@ -52,6 +55,7 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
         }
         //Order the Map according to players points
         val resultMap = hashMap.entries.sortedBy { it.value }.associate { it.toPair() }
+        root.currentGame!!.gameState=GameState.GAME_ENDED
         onAllRefreshables { refreshAfterGameFinished() }
         return resultMap
     }
