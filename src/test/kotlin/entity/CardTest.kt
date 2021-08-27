@@ -88,7 +88,7 @@ class CardTest {
      */
     @Test
     fun testEquals() {
-        assertEquals(queenOfHearts, otherQueenOfHearts)
+        assertEquals(queenOfHearts.toString(), otherQueenOfHearts.toString())
         assertNotSame(queenOfHearts, otherQueenOfHearts)
     }
 

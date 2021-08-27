@@ -5,7 +5,7 @@ import entity.Schwimmen
 import view.Refreshable
 
 /**
- * Class Schwimmen Serviec works as wraper for all the Entities and connects them to Services
+ * Class Schwimmen Service works as wrapper for all the Entities and connects them to Services
  */
 class SchwimmenService {
     /**

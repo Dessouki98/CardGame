@@ -17,7 +17,6 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
      */
     fun startGame(players: MutableList<Player>) {
         val myDeck = root.playAreaService.createDeck()
-        root.currentGame!!.gameState=GameState.GAME_RUNNING
         val cardOnTable1 = myDeck.draw(1)[0]
         val cardOnTable2 = myDeck.draw(1)[0]
         val cardOnTable3 = myDeck.draw(1)[0]

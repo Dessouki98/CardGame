@@ -17,7 +17,6 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
      * @throws IllegalStateException if no game has started yet
      */
      fun calculateScore(player: Player): Double {
-        root.currentGame!!.gameState=GameState.GAME_EVALUATION
         val myCard: MutableList<Double> = mutableListOf(0.0, 0.0, 0.0, 0.0, 0.0)
         for (card: Card in player.hand) {
             when (card.cardsuit.toString()) {
@@ -51,11 +50,10 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
         checkNotNull(game)
         for (player: Player in game.players) {
 
-            hashMap[player] = calculateScore(player) as (Double)
+            hashMap[player] = calculateScore(player)
         }
         //Order the Map according to players points
         val resultMap = hashMap.entries.sortedBy { it.value }.associate { it.toPair() }
-        root.currentGame!!.gameState=GameState.GAME_ENDED
         onAllRefreshables { refreshAfterGameFinished() }
         return resultMap
     }
