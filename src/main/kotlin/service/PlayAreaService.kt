@@ -19,12 +19,39 @@ class PlayAreaService(private val root: SchwimmenService) : AbstractRefreshingSe
      * Creates a shuffled 32 cards list of all four suits and cards
      * from 7 to Ace
      */
-    private fun defaultRandomCardList() = MutableList(32) { index ->
-        Card(
-            Suit.values()[index / 8],
-            Value.values()[(index % 8) + 5]
-        )
-    }.shuffled().toMutableList()//Changes from list to mutable list
+    private fun defaultRandomCardList() =listOf(
+        Card(Suit.CLUBS, Value.QUEEN),
+        Card(Suit.SPADES, Value.TEN),
+        Card(Suit.DIAMONDS, Value.SEVEN),
+        Card(Suit.CLUBS, Value.EIGHT),
+        Card(Suit.CLUBS, Value.NINE),
+        Card(Suit.HEARTS, Value.KING),
+        Card(Suit.DIAMONDS, Value.QUEEN),
+        Card(Suit.SPADES, Value.QUEEN),
+        Card(Suit.DIAMONDS, Value.JACK),
+        Card(Suit.SPADES, Value.SEVEN),
+        Card(Suit.DIAMONDS, Value.KING),
+        Card(Suit.DIAMONDS, Value.NINE),
+        Card(Suit.SPADES, Value.EIGHT),
+        Card(Suit.HEARTS, Value.TEN),
+        Card(Suit.HEARTS, Value.EIGHT),
+        Card(Suit.CLUBS, Value.JACK),
+        Card(Suit.HEARTS, Value.ACE),
+        Card(Suit.SPADES, Value.NINE),
+        Card(Suit.CLUBS, Value.ACE),
+        Card(Suit.SPADES, Value.JACK),
+        Card(Suit.HEARTS, Value.SEVEN),
+        Card(Suit.CLUBS, Value.SEVEN),
+        Card(Suit.CLUBS, Value.KING),
+        Card(Suit.DIAMONDS, Value.EIGHT),
+        Card(Suit.CLUBS, Value.TEN),
+        Card(Suit.DIAMONDS, Value.TEN),
+        Card(Suit.HEARTS, Value.JACK),
+        Card(Suit.SPADES, Value.KING),
+        Card(Suit.DIAMONDS, Value.ACE),
+        Card(Suit.HEARTS, Value.QUEEN),
+        Card(Suit.SPADES, Value.ACE),
+        Card(Suit.HEARTS, Value.NINE),).shuffled().toMutableList()
 
     /**
      * changes the middle Cards with 3 new from the Deck.

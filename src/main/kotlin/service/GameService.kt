@@ -24,7 +24,7 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
         val playerArea = PlayArea(myDeck, cardsOnTable)
         playerSetup(players, myDeck)
         val game = Schwimmen(players, playerArea)
-        game.activePlayer = 1
+        game.activePlayer = 0
         root.currentGame = game
         onAllRefreshables { refreshAfterGameStart() }
     }

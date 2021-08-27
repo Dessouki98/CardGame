@@ -58,6 +58,7 @@ class PlayerService(private val root:SchwimmenService): AbstractRefreshingServic
         table.remove(tableCard)
         table.add(handCard)
         //Pass it on to the next player
+        onAllRefreshables { refreshAfterCardSwap(game.players[active]) }
         root.gameService.nextTurn()
     }
     /**
@@ -94,6 +95,7 @@ class PlayerService(private val root:SchwimmenService): AbstractRefreshingServic
             hand.add(card)
         }
         //Pass it on to the next player
+        onAllRefreshables { refreshAfterCardSwap(game.players[active]) }
         root.gameService.nextTurn()
     }
 
