@@ -1,5 +1,4 @@
 package service
-
 import entity.Card
 import entity.Player
 import entity.Suit
@@ -9,7 +8,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
-
 /**
  * test Evaluation Service which its main request to perform calculating of points and shows how won.
  */
@@ -124,19 +122,17 @@ class EvaluationServiceTest
         p4.hand.addAll(cardSet4)
         //shouldn't be null by this time
         assertNotNull(mc.currentGame)
-        //we now from previous method that we Calculate Points right, now we show that by using [CalculateWinner]
+        //we know from previous method that we Calculate Points right, now we show that by using [CalculateWinner]
         //we get a list of players ordered ascending according to points
-        val hashmap=mc.evaluationService.calculateWinner()
-        val num=hashmap.keys.toMutableList()
+        val playersWithPoints=mc.evaluationService.calculateWinner()
+        val players=playersWithPoints.keys.toMutableList()
         val calcPoints=mc.evaluationService
-        //We show now that the points of player4 is the maximum and that the list is sorted.
-        assertTrue { (calcPoints.calculateScore(num[3])) > (calcPoints.calculateScore(num[2])) }
-        assertTrue { (calcPoints.calculateScore(num[2])) > (calcPoints.calculateScore(num[1])) }
-        assertTrue { (calcPoints.calculateScore(num[1])) > (calcPoints.calculateScore(num[0])) }
-        //we show that refresh is being called right
+        //showing now that the points of player4 is the maximum and that the list is sorted.
+        assertTrue { (calcPoints.calculateScore(players[3])) > (calcPoints.calculateScore(players[2])) }
+        assertTrue { (calcPoints.calculateScore(players[2])) > (calcPoints.calculateScore(players[1])) }
+        assertTrue { (calcPoints.calculateScore(players[1])) > (calcPoints.calculateScore(players[0])) }
+        //showing that refresh is being called right
         assertTrue { testRefreshable.refreshAfterGameFinishedCalled }
         testRefreshable.reset()
     }
-
-
 }

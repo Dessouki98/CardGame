@@ -1,9 +1,5 @@
 package service
-
-
-import entity.Player
 import view.Refreshable
-
 /**
  * [Refreshable] implementation that refreshes nothing, but remembers
  * if a refresh method has been called (since last [reset])
@@ -71,7 +67,4 @@ class TestRefreshable: Refreshable {
     override fun refreshAfterTurnChanged() {
         refreshAfterTurnChangedCalled = true
     }
-
-
-
 }

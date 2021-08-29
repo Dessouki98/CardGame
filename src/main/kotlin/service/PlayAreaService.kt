@@ -69,12 +69,8 @@ class PlayAreaService(private val root: SchwimmenService) : AbstractRefreshingSe
         checkNotNull(game)
         game.playArea.cards.clear()
         val myDeck = game.playArea.deck
-        val cardOnTable1 = myDeck.draw(1)[0]
-        val cardOnTable2 = myDeck.draw(1)[0]
-        val cardOnTable3 = myDeck.draw(1)[0]
-        game.playArea.cards.add(cardOnTable1)
-        game.playArea.cards.add(cardOnTable2)
-        game.playArea.cards.add(cardOnTable3)
+        val cardsOnTable = myDeck.draw(3).toMutableList()
+        game.playArea.cards.addAll(cardsOnTable)
     }
 
     /**
@@ -85,6 +81,6 @@ class PlayAreaService(private val root: SchwimmenService) : AbstractRefreshingSe
         val game = root.currentGame
         checkNotNull(game)
         val myDeck = game.playArea.deck
-        return myDeck.listOfCards.size > 3
+        return myDeck.listOfCards.size >= 3
     }
 }

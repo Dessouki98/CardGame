@@ -1,6 +1,5 @@
 package service
 import entity.Card
-import entity.GameState
 import entity.Player
 /**
  * Service layer Evaluation that provides the number of points each player has, and it also
@@ -49,7 +48,6 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
         val game = root.currentGame
         checkNotNull(game)
         for (player: Player in game.players) {
-
             hashMap[player] = calculateScore(player)
         }
         //Order the Map according to players points

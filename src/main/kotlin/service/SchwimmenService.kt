@@ -1,6 +1,4 @@
 package service
-import entity.PlayArea
-import entity.Player
 import entity.Schwimmen
 import view.Refreshable
 

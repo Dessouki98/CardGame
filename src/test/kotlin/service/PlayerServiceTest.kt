@@ -163,6 +163,6 @@ class PlayerServiceTest {
         assertTrue { testRefreshable.refreshAfterGameFinishedCalled }
         testRefreshable.reset()
     }
-    }
+}
 
 

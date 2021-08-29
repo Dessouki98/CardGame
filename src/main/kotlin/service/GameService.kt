@@ -17,10 +17,7 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
      */
     fun startGame(players: MutableList<Player>) {
         val myDeck = root.playAreaService.createDeck()
-        val cardOnTable1 = myDeck.draw(1)[0]
-        val cardOnTable2 = myDeck.draw(1)[0]
-        val cardOnTable3 = myDeck.draw(1)[0]
-        val cardsOnTable = mutableListOf(cardOnTable1, cardOnTable2, cardOnTable3)
+        val cardsOnTable = myDeck.draw(3).toMutableList()
         val playerArea = PlayArea(myDeck, cardsOnTable)
         playerSetup(players, myDeck)
         val game = Schwimmen(players, playerArea)
@@ -64,27 +61,22 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
                 } else {
                     onAllRefreshables { refreshAfterCardDrawn() }
                     root.playAreaService.renewMiddleCards()
+                    resetPass(game.players)
                 }
             }
+        }
+        else if(!game.players[(active) % num].passed)
+        {
+            resetPass(game.players)
         }
         onAllRefreshables { refreshAfterTurnChanged() }
         game.activePlayer++
     }
-
-    /**
-     * the function checks if One player has knocked and return true of false accordingly
-     */
-    fun checkIfPlayerKnocked(): Boolean {
-        val game = root.currentGame
-        checkNotNull(game)
-        for (player in game.players) {
-            if (player.knocked) {
-                return true
-            }
+    private fun resetPass(players: MutableList<Player>){
+        for (player in players) {
+                player.passed=false
         }
-        return false
     }
-
     /**
      * the function checks if all Player has passed and return true of false accordingly
      */
@@ -100,12 +92,12 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
     }
 
     /**
-     * exit game is resposinble for ending the game and giving wining player back.
+     * exit game is responsible for ending the game and giving wining player back.
      */
-    fun exitGame() {
+    fun exitGame():Map<Player,Double> {
         root.currentGame!!.gameState=GameState.GAME_ENDED
-        root.evaluationService.calculateWinner()
         onAllRefreshables { refreshAfterGameFinished() }
+        return root.evaluationService.calculateWinner()
     }
 
 }

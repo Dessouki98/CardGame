@@ -3,7 +3,9 @@ package service
 import entity.Player
 import view.Refreshable
 import kotlin.test.*
-
+/**
+ * testing the PlayAreaService Class which gives functions that we use in the PlayArea
+ */
 class PlayAreaServiceTest {
     /**
      * a private Function that only Creates a new Game with 2 players and return it back.

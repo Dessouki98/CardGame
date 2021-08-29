@@ -98,5 +98,4 @@ class PlayerService(private val root:SchwimmenService): AbstractRefreshingServic
         onAllRefreshables { refreshAfterCardSwap() }
         root.gameService.nextTurn()
     }
-
 }
