@@ -20,4 +20,9 @@ class Deck(val listOfCards: MutableList<Card>){
         require(amount in 1..listOfCards.size) { "can't draw $amount cards from $listOfCards" }
         return List(amount) { listOfCards.removeFirst() }
     }
+    /**
+     * provides a view of the full stack contents without changing it. Use [draw]
+     * for actually drawing cards from this stack.
+     */
+    fun peekAll(): List<Card> = listOfCards.toList()
 }
