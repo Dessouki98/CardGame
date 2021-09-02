@@ -5,7 +5,7 @@ import view.Refreshable
 /**
  * Class Schwimmen Service works as wrapper for all the Entities and connects them to Services
  */
-class SchwimmenService {
+class SchwimmenService:Refreshable {
     /**
      * The currently active game. Can be `null`, if no game has started yet.
      */
@@ -32,4 +32,5 @@ class SchwimmenService {
     fun addRefreshables(vararg newRefreshables: Refreshable) {
         newRefreshables.forEach { addRefreshable(it) }//uses the last method ([addRefreshable])hmm
     }
+
 }

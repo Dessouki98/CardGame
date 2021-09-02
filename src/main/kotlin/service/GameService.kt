@@ -59,9 +59,9 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
                 if (game.playArea.deck.listOfCards.size < 3) {
                     exitGame()
                 } else {
-                    onAllRefreshables { refreshAfterCardDrawn() }
                     root.playAreaService.renewMiddleCards()
                     resetPass(game.players)
+                    onAllRefreshables { refreshAfterAllPassed() }
                 }
             }
         }
@@ -70,7 +70,7 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
             resetPass(game.players)
         }
         onAllRefreshables { refreshAfterTurnChanged() }
-        game.activePlayer++
+        game.activePlayer=(active+1) % num
     }
     private fun resetPass(players: MutableList<Player>){
         for (player in players) {
@@ -94,10 +94,9 @@ class GameService(private val root: SchwimmenService) : AbstractRefreshingServic
     /**
      * exit game is responsible for ending the game and giving wining player back.
      */
-    fun exitGame():Map<Player,Double> {
+    fun exitGame(){
         root.currentGame!!.gameState=GameState.GAME_ENDED
         onAllRefreshables { refreshAfterGameFinished() }
-        return root.evaluationService.calculateWinner()
     }
 
 }

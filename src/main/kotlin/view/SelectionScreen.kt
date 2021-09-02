@@ -2,7 +2,6 @@ package view
 
 
 import entity.Player
-import service.SchwimmenService
 import tools.aqua.bgw.components.uicomponents.Button
 import tools.aqua.bgw.components.uicomponents.Label
 import tools.aqua.bgw.components.uicomponents.TextField
@@ -10,10 +9,10 @@ import tools.aqua.bgw.core.BoardGameScene
 import tools.aqua.bgw.util.Font
 import tools.aqua.bgw.visual.ColorVisual
 import java.awt.Color
-import javax.swing.JOptionPane
 
-class SelectionScreen(private val rootService: SchwimmenService): BoardGameScene(1920, 1080), Refreshable {
-    private val players= mutableListOf<Player>()
+class SelectionScreen(private val schwimmenApplication: SchwimmenApplication) : BoardGameScene(1920, 1080),
+    Refreshable {
+    private val players = mutableListOf<Player>()
 
     private val helloLabel = Label(
         width = 1740,
@@ -21,7 +20,7 @@ class SelectionScreen(private val rootService: SchwimmenService): BoardGameScene
         posX = 0,
         posY = -50,
         text = "Schwimmen",
-        font = Font(size = 120,color = Color.red,family = "Algerian")
+        font = Font(size = 120, color = Color.red, family = "Algerian")
 
     )
     private val p1Label = Label(
@@ -62,7 +61,7 @@ class SelectionScreen(private val rootService: SchwimmenService): BoardGameScene
 
     private val p4Label = Label(
         width = 200, height = 100,
-       posX = 1540, posY = 720,
+        posX = 1540, posY = 720,
         text = "Player 4:",
         font = Font(size = 30)
     )
@@ -77,42 +76,38 @@ class SelectionScreen(private val rootService: SchwimmenService): BoardGameScene
         posX = 610, posY = 800,
         text = "Quit"
     ).apply {
-        visual = ColorVisual(221, 136, 136)
+        visual = ColorVisual(164, 62, 62)
+        onMouseClicked = { schwimmenApplication.exit() }
     }
 
-     val startButton = Button(
+    val startButton = Button(
         width = 180, height = 80,
         posX = 970, posY = 800,
         text = "Start"
     ).apply {
-        visual = ColorVisual(136, 221, 136)
-        onMouseClicked  = {
+        visual = ColorVisual(46, 164, 114)
+        onMouseClicked = {
             players.clear()
-           if(!p1Input.text.isBlank())
-           {
-               val player1=Player(p1Input.text,0)
-               players.add(player1)
-           }
-            if(!p2Input.text.isBlank())
-            {
-                val player2=Player(p2Input.text,1)
+            if (!p1Input.text.isBlank()) {
+                val player1 = Player(p1Input.text, 0)
+                players.add(player1)
+            }
+            if (!p2Input.text.isBlank()) {
+                val player2 = Player(p2Input.text, 1)
                 players.add(player2)
             }
-            if(!p3Input.text.isBlank())
-            {
-                val player3=Player(p3Input.text,2)
+            if (!p3Input.text.isBlank()) {
+                val player3 = Player(p3Input.text, 2)
                 players.add(player3)
             }
-            if(!p4Input.text.isBlank())
-            {
-                val player4=Player(p4Input.text,3)
+            if (!p4Input.text.isBlank()) {
+                val player4 = Player(p4Input.text, 3)
                 players.add(player4)
             }
-            if(players.size<2)
-            {
+            if (players.size < 2) {
                 throw IllegalArgumentException("Enter more players")
             }
-            rootService.gameService.startGame(players)
+            schwimmenApplication.schwimmenService.gameService.startGame(players)
         }
     }
 
@@ -121,11 +116,11 @@ class SelectionScreen(private val rootService: SchwimmenService): BoardGameScene
         background = ColorVisual(196, 196, 196)
         addComponents(
             helloLabel,
-            p1Label,p1Input,
-            p2Label,p2Input,
-            p3Label,p3Input,
-            p4Label,p4Input,
-            startButton,quitButton
+            p1Label, p1Input,
+            p2Label, p2Input,
+            p3Label, p3Input,
+            p4Label, p4Input,
+            startButton, quitButton
         )
     }
 

@@ -52,7 +52,6 @@ class EvaluationService(private val root: SchwimmenService) : AbstractRefreshing
         }
         //Order the Map according to players points
         val resultMap = hashMap.entries.sortedBy { it.value }.associate { it.toPair() }
-        onAllRefreshables { refreshAfterGameFinished() }
         return resultMap
     }
 }

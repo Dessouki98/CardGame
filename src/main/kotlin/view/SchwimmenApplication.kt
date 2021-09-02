@@ -3,45 +3,39 @@ package view
 import service.SchwimmenService
 import tools.aqua.bgw.core.BoardGameApplication
 
-class SchwimmenApplication : BoardGameApplication("Schwimmen Spiel"),Refreshable {
-    // Central service from which all others are created/accessed.
-    // also holds the currently active game.
-    private val rootService = SchwimmenService()
-    // This is where the actual game takes place
-    private val gameScene = GameScreen(rootService)
+/**
+ * This Class Works As wrapper for all GameScreens
+ */
+class SchwimmenApplication : BoardGameApplication("Schwimmen Spiel"), Refreshable {
 
-    // This menu scene is shown after application start and if the "new game" button.
-    // is clicked in the gameFinishedMenuScene.
-    private val newGameMenuScene = SelectionScreen(rootService).apply {
-        quitButton.onMouseClicked = {
-            exit()
-        }
-        startButton.onMouseClicked={
-            showGameScene(gameScene)
-//            if(rootService.currentGame?.players?.size!! > 1)
-//            {
-//                showGameScene(gameScene)
-//            }
-//            else
-//            {
-//                rootService.currentGame?.players?.clear()
-//                throw IllegalArgumentException("Enter more players")
-//            }
-        }
+    val schwimmenService = SchwimmenService()
+    private val gameScene = GameScreen(this)
+    val selectionScreen = SelectionScreen(this)
+    private val scoresScreen = ScoresScreen(this)
 
+    init {
+        /**
+         * all scenes and the application itself need to
+         * react to change done in the service layer
+         *Important:when we use now addRefreshable on schwimmenService this means these scenes will also hear when ever
+         * the On all refreshables are Called because they are now also in the list.
+         */
+        this.showGameScene(selectionScreen)
+        schwimmenService.addRefreshables(
+            this,
+            gameScene,
+            selectionScreen,
+            scoresScreen
+        )
     }
 
-   init {
+    override fun refreshAfterGameStart() {
+        showGameScene(gameScene)
+    }
 
-       // all scenes and the application itself need too
-       // react to changes done in the service layer
-       rootService.addRefreshables(
-           this,
-           gameScene,
-           newGameMenuScene
-       )
-       this.showGameScene(newGameMenuScene)
-   }
+    override fun refreshAfterGameFinished() {
+        this.showGameScene(scoresScreen)
+    }
 
 }
 

@@ -17,8 +17,8 @@ class PlayerService(private val root:SchwimmenService): AbstractRefreshingServic
         checkNotNull(game)
         val active=game.activePlayer
         game.players[active].knocked= true
-        onAllRefreshables { refreshAfterKncoked() }
         root.gameService.nextTurn()//root y3rf el services we al entities
+        onAllRefreshables { refreshAfterKncoked() }
     }
     /**
      *sets the pass variable to true,Afterwards is the goes the turn to the next player using nextTurn.
@@ -31,8 +31,9 @@ class PlayerService(private val root:SchwimmenService): AbstractRefreshingServic
         checkNotNull(game)
         val active=game.activePlayer
         game.players[active].passed= true
-        onAllRefreshables { refreshAfterPassed() }
         root.gameService.nextTurn()
+        onAllRefreshables { refreshAfterPassed() }
+
     }
     /**
      *swaps one Card of player hand with one on the table
@@ -58,8 +59,8 @@ class PlayerService(private val root:SchwimmenService): AbstractRefreshingServic
         table.remove(tableCard)
         table.add(handCard)
         //Pass it on to the next player
-        onAllRefreshables { refreshAfterCardSwap() }
         root.gameService.nextTurn()
+        onAllRefreshables { refreshAfterCardsSwap() }
     }
     /**
      *swaps all Card of player's hand with the ones on the table
@@ -94,8 +95,8 @@ class PlayerService(private val root:SchwimmenService): AbstractRefreshingServic
         {
             hand.add(card)
         }
-        //Pass it on to the next player
-        onAllRefreshables { refreshAfterCardSwap() }
         root.gameService.nextTurn()
+        //Pass it on to the next player
+        onAllRefreshables { refreshAfterCardsSwap() }
     }
 }

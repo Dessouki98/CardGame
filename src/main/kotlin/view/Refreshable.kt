@@ -1,7 +1,5 @@
 package view
 
-import entity.Card
-import entity.Player
 import service.AbstractRefreshingService
 
 
@@ -18,38 +16,38 @@ import service.AbstractRefreshingService
  */
 interface Refreshable {
 
-     /**
-      * perform refreshes that are necessary after a new game started.
-      */
-     fun refreshAfterGameStart() {}
+    /**
+     * perform refreshes that are necessary after a new game started.
+     */
+    fun refreshAfterGameStart() {}
 
-     /**
-      * perform refreshes that are necessary after a game has ended.
-      */
-     fun refreshAfterGameFinished() {}
+    /**
+     * perform refreshes that are necessary after a game has ended.
+     */
+    fun refreshAfterGameFinished() {}
 
-     /**
-      * perform refreshes that are necessary after a card has been drawn.
-      */
-     fun refreshAfterCardDrawn() {}
+    /**
+     * perform refreshes that are necessary after a card has been drawn.
+     */
+    fun refreshAfterAllPassed() {}
 
-     /**
-      * perform refreshes that are necessary after a Care has been swapped.
-      */
-     fun refreshAfterCardSwap() {}
+    /**
+     * perform refreshes that are necessary after a Care has been swapped.
+     */
+    fun refreshAfterCardsSwap() {}
 
-     /**
-      * perform refreshes that are necessary after player has knocked.
-      */
-     fun refreshAfterKncoked() {}
+    /**
+     * perform refreshes that are necessary after player has knocked.
+     */
+    fun refreshAfterKncoked() {}
 
-     /**
-      *  perform refreshes that are necessary after a player has passed.
-      */
-     fun refreshAfterPassed() {}
+    /**
+     *  perform refreshes that are necessary after a player has passed.
+     */
+    fun refreshAfterPassed() {}
 
-     /**
-      * perform refreshes that are necessary after turn Changes
-      */
-     fun refreshAfterTurnChanged() {}
+    /**
+     * perform refreshes that are necessary after turn Changes
+     */
+    fun refreshAfterTurnChanged() {}
 }
