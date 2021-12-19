@@ -49,11 +49,11 @@ class TestRefreshable: Refreshable {
         refreshAfterGameFinishedCalled = true
     }
 
-    override fun refreshAfterCardDrawn() {
+     fun refreshAfterCardDrawn() {
         refreshAfterCardDrawnCalled = true
     }
 
-    override fun refreshAfterCardSwap() {
+     fun refreshAfterCardSwap() {
         refreshAfterCardSwapCalled = true
     }
 

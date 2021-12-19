@@ -19,7 +19,7 @@ class SelectionScreen(private val schwimmenApplication: SchwimmenApplication) : 
         height = 1080,
         posX = 0,
         posY = -50,
-        text = "Schwimmen",
+        text = "CardGame by Zeyad",
         font = Font(size = 120, color = Color.red, family = "Algerian")
 
     )

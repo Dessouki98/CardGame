@@ -21,7 +21,7 @@ class GameScreen(private val schwimmenApplication: SchwimmenApplication) : Board
      */
     private val banner = Label(
         width = 800, height = 350, posX = 450, posY = -60,
-        font = Font(size = 70, color = Color.RED, family = "Papyrus"), text = "Schwimmen"
+        font = Font(size = 70, color = Color.RED, family = "Papyrus"), text = "CardGame"
     )
 
     /**
